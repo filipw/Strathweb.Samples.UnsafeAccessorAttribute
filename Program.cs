@@ -12,7 +12,7 @@ CallDogMeowMethod(dog, 2);
 var anotherDog = CallDogConstructor("Mickey");
 anotherDog.Bark(2);
 
-[UnsafeAccessor(UnsafeAccessorKind., Name = "_name")]
+[UnsafeAccessor(UnsafeAccessorKind.Field, Name = "_name")]
 static extern ref string DogNameField(Dog dog);
 
 [UnsafeAccessor(UnsafeAccessorKind.Method, Name = "Meow")]
