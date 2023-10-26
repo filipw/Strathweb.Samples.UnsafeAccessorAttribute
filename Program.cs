@@ -1,43 +1,38 @@
 ﻿using System.Runtime.CompilerServices;
 
-namespace UnsafeAccessorSample;
 
-public static class Program
-{
-    public static void Main()
-    {
-        var dog = new Dog();
-        dog.Bark(2);
-        
-        DogNameField(dog) = "Minnie";
-        dog.Bark(2);
+var dog = new Dog();
+dog.Bark(2);
 
-        CallDogMeowMethod(dog, 2);
+DogNameField(dog) = "Minnie";
+dog.Bark(2);
 
-        var anotherDog = CallDogConstructor("Mickey");
-        anotherDog.Bark(2);
-    }
-    
-    [UnsafeAccessor(UnsafeAccessorKind.Field, Name = "_name")]
-    private static extern ref string DogNameField(Dog dog);
-    
-    [UnsafeAccessor(UnsafeAccessorKind.Method, Name = "Meow")]
-    private static extern void CallDogMeowMethod(Dog dog, int times);
-    
-    [UnsafeAccessor(UnsafeAccessorKind.Constructor)]
-    private static extern Dog CallDogConstructor(string name);
-}
+CallDogMeowMethod(dog, 2);
+
+var anotherDog = CallDogConstructor("Mickey");
+anotherDog.Bark(2);
+
+[UnsafeAccessor(UnsafeAccessorKind., Name = "_name")]
+static extern ref string DogNameField(Dog dog);
+
+[UnsafeAccessor(UnsafeAccessorKind.Method, Name = "Meow")]
+static extern void CallDogMeowMethod(Dog dog, int times);
+
+[UnsafeAccessor(UnsafeAccessorKind.Constructor)]
+static extern Dog CallDogConstructor(string name);
 
 class Dog
 {
-    private string _name = "Pluto";
+    private string _name;
 
     private Dog(string name)
     {
         _name = name ?? throw new ArgumentNullException(nameof(name));
     }
-    
-    public Dog() {}
+
+    public Dog() : this("Pluto")
+    {
+    }
 
     private void Meow(int times)
     {
@@ -46,6 +41,7 @@ class Dog
         {
             Console.Write("Meow! ");
         }
+
         Console.WriteLine();
     }
 
@@ -56,6 +52,7 @@ class Dog
         {
             Console.Write("Woof! ");
         }
+
         Console.WriteLine();
     }
 }
