@@ -1,1 +1,1 @@
-# Strathweb.Samples.UnsafeAccessorKind
+# Strathweb.Samples.UnsafeAccessorAttribute
